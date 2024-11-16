@@ -107,10 +107,32 @@ the data.
 
  */
 	
-/*C Estimating the preference parameters using cmrologit 
-gen choice1School=0 
-replace choice1School=1 if ranking==1
-cmrologit choice1School school_va distance sports_rank school_needs, vce(student_id)
+*******C
+	gen choice1School=0 
+	replace choice1School=1 if ranking==1
+	cmset student_id school_id
+	cmrologit choice1School school_va distance sports_rank school_needs //need to add cluster later 
+	
+*******D. 
+cmset student_id school_id
+cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+
+******E 
+********If SES=high 
+
+preserve
+keep if ses==1
+cmset student_id school_id
+cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+restore
+
+preserve
+keep if ses==0
+cmset student_id school_id
+cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+restore
+
+	
 	
 
 	
