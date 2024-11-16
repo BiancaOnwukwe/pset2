@@ -17,7 +17,7 @@ set more off
 		}
 		
 		if "`c(username)'" == "Akanksha" {
-		global user "G:/Dropbox" 
+		global user "/Users/akankshasoni/Dropbox" 
 		}	
  
 ******** Path tree*****************
