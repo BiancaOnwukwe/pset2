@@ -107,6 +107,12 @@ the data.
 
  */
 	
+/*C Estimating the preference parameters using cmrologit 
+gen choice1School=0 
+replace choice1School=1 if ranking==1
+cmrologit choice1School school_va distance sports_rank school_needs, vce(student_id)
+	
+
 	
 	
 	
@@ -116,5 +122,4 @@ the data.
 	
 	
 	
-	log close
 	
