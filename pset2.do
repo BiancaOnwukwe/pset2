@@ -16,7 +16,7 @@ set more off
 		global user "/Users/b/Desktop/PhD"
 		}
 		
-		if "`c(username)'" == "Akanksha" {
+		if "`c(username)'" == "akankshasoni" {
 		global user "/Users/akankshasoni/Dropbox" 
 		}	
  
