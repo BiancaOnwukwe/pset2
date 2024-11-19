@@ -1,6 +1,7 @@
 clear all
 capture log close
 set more off
+log using pset2.log, replace
 /**************************************************************************************
 	ECONOMICS OF EDUCATION
 	PROBLEM SET 2
@@ -16,7 +17,7 @@ set more off
 		global user "/Users/b/Desktop/PhD"
 		}
 		
-		if "`c(username)'" == "akankshasoni" {
+		if "`c(username)'" == "Akanksha" {
 		global user "/Users/akankshasoni/Dropbox" 
 		}	
  
@@ -106,42 +107,60 @@ to use a exploded logit. Describe this strategy and write down the likelihood fu
 the data.
 
  */
+ 
+	//Answered in PDF
 	
-*******C
+	
+/*c.Estimate the preference parameters using only data on the first preference stated by households.
+Report your results in a table and discuss. */
+
 	gen choice1School=0 
 	replace choice1School=1 if ranking==1
 	cmset student_id school_id
 	cmrologit choice1School school_va distance sports_rank school_needs //need to add cluster later 
 	
-*******D. 
-cmset student_id school_id
-cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+/*d. Estimate the preference parameters using data on preferences stated by households for all
+schools. Report your results in a table and discuss.*/
 
-******E 
-********If SES=high 
+	cmset student_id school_id
+	cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
 
-preserve
-keep if ses==1
-cmset student_id school_id
-cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
-restore
+/**e. Now we allow for observable heterogeneity in preferences. Define two household types
+as being above or below the median and denote them High-SES and Low-SES households
+respectively. Estimate preference parameters for each of these groups using all stated preferences.
+Report your results in a table and discuss the differences between them. In particular,
+how much are both types willing to travel for an increase of 0.1 s.d. in school value added?
+	*/
 
-preserve
-keep if ses==0
-cmset student_id school_id
-cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
-restore
+	preserve
+	keep if ses==1
+	cmset student_id school_id
+	cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+	restore
+
+	preserve
+	keep if ses==0
+	cmset student_id school_id
+	cmrologit ranking school_va distance sports_rank school_needs, reverse //need to add cluster later 
+	restore
 
 	
 	
+/*2. Using deferred acceptance to assign students */
+	
+/*a. Answer in PDF*/
+
+/*b. Implement school assignment for the school district in the dataset using DA and student
+lottery numbers in the dataset. Make sure to satisfy school capacity constraints. For now,
+assume there are no priorities. */
+
 
 	
 	
 	
 	
 	
-	
-	
+	log close
 	
 	
 	
